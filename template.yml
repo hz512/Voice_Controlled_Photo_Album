@@ -1,0 +1,29 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: CodePipeline for HW3
+Resources:
+  cloudformationLambdaIndex:
+    Type: AWS::Serverless::Function
+    DeletionPolicy: Delete
+    Properties:
+      FunctionName: cloudformation-index-photos
+      Runtime: python3.8
+      Handler: index-photos.lambda_handler
+      Timeout: 10
+      Role: arn:aws:iam::866265759394:role/hz2712_lambda
+      CodeUri: .
+      Layers:
+        - arn:aws:lambda:us-east-1:866265759394:layer:requests:3
+
+  cloudformationLambdaSearch:
+    Type: AWS::Serverless::Function
+    DeletionPolicy: Delete
+    Properties:
+      FunctionName: cloudformation-search-photos
+      Runtime: python3.8
+      Handler: search-photos.lambda_handler
+      Timeout: 10
+      Role: arn:aws:iam::866265759394:role/hz2712_lambda
+      CodeUri: .
+      Layers:
+        - arn:aws:lambda:us-east-1:866265759394:layer:requests:3
